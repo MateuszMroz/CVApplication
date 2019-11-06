@@ -1,10 +1,9 @@
-package com.uk.androidrecruitmentapp.dagger.component
+package com.mroz.mateusz.cvapplication.di.component
 
 import android.app.Application
-import com.uk.androidrecruitmentapp.dagger.module.MainActivityModule
-import com.uk.androidrecruitmentapp.dagger.module.NetworkModule
-import com.uk.androidrecruitmentapp.dagger.viewModel.ViewModelModule
-import com.uk.androidrecruitmentapp.ARApplication
+import com.mroz.mateusz.cvapplication.CVApplication
+import com.mroz.mateusz.cvapplication.di.module.MainActivityModule
+import com.mroz.mateusz.cvapplication.di.module.AppModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -13,8 +12,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [
     AndroidInjectionModule::class,
-    NetworkModule::class,
-    ViewModelModule::class,
+    AppModule::class,
     MainActivityModule::class])
 interface AppComponent {
 
@@ -25,5 +23,5 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-    fun inject(arApplication: ARApplication)
+    fun inject(arApplication: CVApplication)
 }

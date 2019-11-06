@@ -1,19 +1,11 @@
-package com.uk.androidrecruitmentapp.dagger.module
+package com.mroz.mateusz.cvapplication.di.module
 
-import com.uk.androidrecruitmentapp.ui.characters.CharactersFragment
-import com.uk.androidrecruitmentapp.ui.episodes.EpisodesFragment
-import com.uk.androidrecruitmentapp.ui.locations.LocationsFragment
+import com.mroz.mateusz.cvapplication.ui.list_section.ListSectionFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class FragmentBuilderModule {
     @ContributesAndroidInjector
-    abstract fun contributeEpisodeFragment(): EpisodesFragment
-
-    @ContributesAndroidInjector
-    abstract fun contributeLocationsFragment(): LocationsFragment
-
-    @ContributesAndroidInjector
-    abstract fun contributeCharactersFragment(): CharactersFragment
+    abstract fun contributeEpisodeFragment(): ListSectionFragment
 }

@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <dimen name="small">2dp</dimen>
+    <dimen name="medium">4dp</dimen>
+    <dimen name="large">8dp</dimen>
+    <dimen name="xl">16dp</dimen>
+    <dimen name="xxl">24dp</dimen>
+    <dimen name="xxxl">32dp</dimen>
+    <dimen name="max_width_text_info">150dp</dimen>
+</resources>

@@ -1,5 +1,7 @@
 package com.mroz.mateusz.cvapplication.ui.experience.model
 
 
-class ListExperience {
+data class ListExperience(
+    val listExperience: List<Experience>
+) {
 }

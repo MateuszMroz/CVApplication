@@ -1,6 +1,6 @@
-package com.uk.androidrecruitmentapp.dagger.module
+package com.mroz.mateusz.cvapplication.di.module
 
-import com.uk.androidrecruitmentapp.ui.MainActivity
+import com.mroz.mateusz.cvapplication.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

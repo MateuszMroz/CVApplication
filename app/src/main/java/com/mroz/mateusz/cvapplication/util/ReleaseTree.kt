@@ -1,4 +1,4 @@
-package com.uk.androidrecruitmentapp.util
+package com.mroz.mateusz.cvapplication.util
 
 import timber.log.Timber
 

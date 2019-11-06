@@ -1,4 +1,4 @@
-package com.uk.androidrecruitmentapp.dagger
+package com.mroz.mateusz.cvapplication.di
 
 import android.app.Activity
 import android.app.Application
@@ -6,15 +6,14 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import com.uk.androidrecruitmentapp.ARApplication
-import com.uk.androidrecruitmentapp.dagger.component.DaggerAppComponent
+import com.mroz.mateusz.cvapplication.CVApplication
+import com.mroz.mateusz.cvapplication.di.component.DaggerAppComponent
 import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
 
-
 object AppInjector {
-    fun init(arApplication: ARApplication) {
+    fun init(arApplication: CVApplication) {
         DaggerAppComponent
             .builder()
             .application(arApplication)

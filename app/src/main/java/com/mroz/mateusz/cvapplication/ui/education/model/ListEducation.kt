@@ -1,6 +1,6 @@
 package com.mroz.mateusz.cvapplication.ui.education.model
 
 
-class Education {
-    
-}
+class ListEducation(
+    val listEducation: List<Education>
+)

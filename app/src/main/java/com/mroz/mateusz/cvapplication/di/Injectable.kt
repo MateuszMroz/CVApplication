@@ -1,4 +1,4 @@
-package com.uk.androidrecruitmentapp.dagger
+package com.mroz.mateusz.cvapplication.di
 
 
 interface Injectable

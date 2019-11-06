@@ -8,11 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.mroz.mateusz.cvapplication.R
+import com.mroz.mateusz.cvapplication.ui.base.BaseFragment
 
 /**
  * A simple [Fragment] subclass.
  */
-class ExperienceFragment : Fragment() {
+class ExperienceFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

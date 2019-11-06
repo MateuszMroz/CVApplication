@@ -1,8 +1,13 @@
 package com.mroz.mateusz.cvapplication.di.module
 
+import android.app.Application
+import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.mroz.mateusz.cvapplication.CVApplication
 import com.mroz.mateusz.cvapplication.api.ApiService
+import com.mroz.mateusz.cvapplication.db.ResumeDao
+import com.mroz.mateusz.cvapplication.db.ResumeDb
 import com.mroz.mateusz.cvapplication.util.BASE_URL
 import com.mroz.mateusz.cvapplication.util.TIMEOUT
 import dagger.Module
@@ -17,7 +22,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class NetworkModule {
+class AppModule {
     @Provides
     @Singleton
     fun providesGson(): Gson {
@@ -62,5 +67,20 @@ class NetworkModule {
         var httpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { message -> Timber.d(message) })
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return httpLoggingInterceptor
+    }
+
+    @Singleton
+    @Provides
+    fun provideDb(app: Application): ResumeDb {
+        return Room
+            .databaseBuilder(app, ResumeDb::class.java, "resume.db")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideUserDao(db: ResumeDb): ResumeDao {
+        return db.resumeDao()
     }
 }

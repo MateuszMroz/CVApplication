@@ -1,7 +1,5 @@
-package com.uk.androidrecruitmentapp.util
+package com.mroz.mateusz.cvapplication.util
 
 
-const val BASE_URL: String = "https://rickandmortyapi.com/api/"
+const val BASE_URL: String = "https://my-json-server.typicode.com/MateuszMroz/ResumeAPI/"
 const val TIMEOUT: Long = 30
-const val PAGE_SIZE = 20
-const val EMPTY_RESPONSE = 204

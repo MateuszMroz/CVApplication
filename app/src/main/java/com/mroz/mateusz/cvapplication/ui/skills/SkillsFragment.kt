@@ -8,11 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.mroz.mateusz.cvapplication.R
+import com.mroz.mateusz.cvapplication.ui.base.BaseFragment
 
 /**
  * A simple [Fragment] subclass.
  */
-class SkillsFragment : Fragment() {
+class SkillsFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

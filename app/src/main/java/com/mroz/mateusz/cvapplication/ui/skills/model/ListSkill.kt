@@ -1,5 +1,7 @@
 package com.mroz.mateusz.cvapplication.ui.skills.model
 
 
-class ListSkill {
+data class ListSkill(
+    val listSkills: List<Skill>
+) {
 }
