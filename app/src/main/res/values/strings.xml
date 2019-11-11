@@ -10,6 +10,18 @@
     <string name="skills">Skills</string>
     <string name="education">Education</string>
     <string name="info">{INFO}</string>
-    <string name="please_wait">Please wait.</string>
+    <string name="please_wait">Please wait!</string>
+    <string name="accept_permission">Accept permission is necessary.</string>
+    <string name="address">Address</string>
+    <string name="address_hint">{ADDRESS}</string>
+    <string name="phone">Phone</string>
+    <string name="phone_hint">{PHONE}</string>
+    <string name="e_mail">E-mail</string>
+    <string name="mail_hint">{MAIL}</string>
+    <string name="github">Github</string>
+    <string name="github_hint">{GITHUB}</string>
+    <string name="linkedin">LinkedIn</string>
+    <string name="linkedin_hint">{LINKEDIN}</string>
+    <string name="canot_open_fragment">Can not open fragment!</string>
 
 </resources>

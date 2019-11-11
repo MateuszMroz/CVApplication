@@ -2,6 +2,7 @@ package com.mroz.mateusz.cvapplication
 
 import android.app.Activity
 import android.app.Application
+import android.content.Context
 import com.mroz.mateusz.cvapplication.di.AppInjector
 import com.mroz.mateusz.cvapplication.util.ReleaseTree
 import dagger.android.DispatchingAndroidInjector

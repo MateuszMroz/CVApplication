@@ -5,7 +5,6 @@
     android:layout_margin="@dimen/medium"
     android:orientation="vertical">
 
-
     <TextView
         android:id="@+id/section_title_tv"
         android:layout_width="match_parent"
@@ -15,5 +14,6 @@
         android:minHeight="40dp"
         android:paddingLeft="@dimen/large"
         android:text="{SECTION NAME}"
-        android:textSize="18sp" />
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
 </androidx.cardview.widget.CardView>

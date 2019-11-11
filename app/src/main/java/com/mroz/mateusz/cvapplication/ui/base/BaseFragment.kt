@@ -1,29 +1,39 @@
 package com.mroz.mateusz.cvapplication.ui.base
 
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.mroz.mateusz.cvapplication.R
-import com.mroz.mateusz.cvapplication.di.Injectable
-import com.mroz.mateusz.cvapplication.util.ProgressDialog
+import kotlinx.android.synthetic.main.please_wait_information.*
 
-open class BaseFragment : Fragment(), Injectable {
 
-    private val progressDialog = context?.let { ProgressDialog(it) }
+abstract class BaseFragment : Fragment(), BaseView {
 
-    protected fun showError(message: String?, view: View) {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val layout: Int = layout()
+        return inflater.inflate(layout, container, false)
+    }
+
+    abstract fun layout(): Int
+
+    override fun message(message: String?, view: View) {
         Snackbar.make(
             view,
             message ?: getString(R.string.unknown_message), Snackbar.LENGTH_LONG
         ).show()
     }
 
-    protected fun showLoader(message: String) {
-        progressDialog?.show()
-        progressDialog?.setInfo(message)
+    override fun loaderOn() {
+        loading_state.visibility = View.VISIBLE
     }
 
-    protected fun hideLoader() {
-        progressDialog?.hide()
+    override fun loaderOff() {
+        loading_state.visibility = View.GONE
     }
 }

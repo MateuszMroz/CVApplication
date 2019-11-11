@@ -1,6 +1,6 @@
 package com.mroz.mateusz.cvapplication.di.module
 
-import com.mroz.mateusz.cvapplication.MainActivity
+import com.mroz.mateusz.cvapplication.ui.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

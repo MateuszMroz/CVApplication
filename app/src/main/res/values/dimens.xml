@@ -6,5 +6,6 @@
     <dimen name="xl">16dp</dimen>
     <dimen name="xxl">24dp</dimen>
     <dimen name="xxxl">32dp</dimen>
+    <dimen name="icon_size">64dp</dimen>
     <dimen name="max_width_text_info">150dp</dimen>
 </resources>

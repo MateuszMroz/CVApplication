@@ -1,17 +1,28 @@
 package com.mroz.mateusz.cvapplication.api
 
-import retrofit2.Call
+import com.mroz.mateusz.cvapplication.ui.base_information.model.BaseInfo
+import com.mroz.mateusz.cvapplication.ui.education.model.Education
+import com.mroz.mateusz.cvapplication.ui.experience.model.Experience
+import com.mroz.mateusz.cvapplication.ui.projects.model.Project
+import com.mroz.mateusz.cvapplication.ui.skills.model.Skill
+import io.reactivex.Single
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 interface ApiService {
 
-    /*@GET("episode")
-    fun getEpisode(@Query("page") page:Int): Call<Episodes>
+    @GET("baseInfo")
+    fun getBaseInformation(): Single<BaseInfo>
 
-    @GET("character")
-    fun getCharacter(@Query("page") page:Int): Call<Characters>
+    @GET("education")
+    fun getEducationPosition(): Single<List<Education>>
 
-    @GET("location")
-    fun getLocations(@Query("page") page:Int): Call<Locations>*/
+    @GET("experience")
+    fun getExperience(): Single<List<Experience>>
+
+    @GET("projects")
+    fun getProjects(): Single<List<Project>>
+
+    @GET("skills")
+    fun getSkills(): Single<List<Skill>>
+
 }

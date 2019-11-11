@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.item_section.view.*
 class SectionViewHolder(itemView: View, sectionInterface: SectionAdapter.SectionInterface) :
     RecyclerView.ViewHolder(itemView) {
     lateinit var sectionModel: SectionModel
+
     init {
         itemView.setOnClickListener {
             sectionInterface.onSectionClick(sectionModel)
