@@ -1,6 +1,6 @@
 package com.mroz.mateusz.cvapplication.ui.experience
 
-import com.mroz.mateusz.cvapplication.api.ApiService
+import com.mroz.mateusz.cvapplication.data.remote.ApiService
 import com.mroz.mateusz.cvapplication.ui.experience.adapter.ExperienceGroup
 import com.mroz.mateusz.cvapplication.ui.experience.model.Experience
 import com.mroz.mateusz.cvapplication.util.AutoSingleObservable

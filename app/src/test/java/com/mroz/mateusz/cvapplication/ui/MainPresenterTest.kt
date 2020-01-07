@@ -1,19 +1,21 @@
 package com.mroz.mateusz.cvapplication.ui
 
 import com.mroz.mateusz.cvapplication.RxImmediateSchedulerRule
-import com.mroz.mateusz.cvapplication.api.ApiService
+import com.mroz.mateusz.cvapplication.data.remote.ApiService
 import com.mroz.mateusz.cvapplication.ui.base_information.model.BaseInfo
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.TestObserver
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.subscribers.TestSubscriber
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.BDDMockito.`when`
 import org.mockito.BDDMockito.given
-import org.mockito.Mockito
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnit
 import java.lang.RuntimeException
 
@@ -28,15 +30,31 @@ class MainPresenterTest {
     @JvmField
     var testSchedulerRule = RxImmediateSchedulerRule()
 
+    @InjectMocks
     lateinit var mainPresenter: MainPresenter
+    @Mock
     lateinit var apiService: ApiService
+
     lateinit var baseInfo: BaseInfo
 
     @Before
     fun setUp() {
-        mainPresenter = Mockito.mock(MainPresenter::class.java)
-        apiService = Mockito.mock(ApiService::class.java)
+        MockitoAnnotations.initMocks(this)
         baseInfo = prepareData()
+    }
+
+    @Test
+    fun loadBaseInfoWithRX() {
+        //given
+        val subscribe: TestSubscriber<BaseInfo> = TestSubscriber()
+        val observer: TestObserver<BaseInfo> = TestObserver()
+        `when`(apiService.getBaseInformation())
+            .thenReturn(Single.just(baseInfo))
+        given(apiService.getBaseInformation().subscribe()).willReturn(observer)
+        //when
+        mainPresenter.loadBaseInfo()
+        //then
+        observer.assertComplete()
     }
 
     @Test

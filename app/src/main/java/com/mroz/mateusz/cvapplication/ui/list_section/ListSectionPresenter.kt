@@ -1,6 +1,6 @@
 package com.mroz.mateusz.cvapplication.ui.list_section
 
-import com.mroz.mateusz.cvapplication.api.ApiService
+import com.mroz.mateusz.cvapplication.data.remote.ApiService
 import javax.inject.Inject
 
 

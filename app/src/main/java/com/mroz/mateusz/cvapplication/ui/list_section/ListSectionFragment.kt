@@ -1,12 +1,14 @@
 package com.mroz.mateusz.cvapplication.ui.list_section
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.mroz.mateusz.cvapplication.R
-import com.mroz.mateusz.cvapplication.di.Injectable
 import com.mroz.mateusz.cvapplication.ui.base.BaseFragment
 import com.mroz.mateusz.cvapplication.ui.base_information.BaseInfoFragment
 import com.mroz.mateusz.cvapplication.ui.education.EducationFragment
@@ -15,11 +17,17 @@ import com.mroz.mateusz.cvapplication.ui.list_section.adapter.SectionAdapter
 import com.mroz.mateusz.cvapplication.ui.list_section.model.SectionModel
 import com.mroz.mateusz.cvapplication.ui.projects.ProjectsFragment
 import com.mroz.mateusz.cvapplication.ui.skills.SkillsFragment
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_list_section.*
+import kotlinx.android.synthetic.main.fragment_list_section.loading_state
+import kotlinx.android.synthetic.main.fragment_skills.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-class ListSectionFragment : BaseFragment(), ListSectionView, Injectable {
+class ListSectionFragment : DaggerFragment(), ListSectionView {
     companion object {
         @JvmStatic
         fun newInstance() = ListSectionFragment()
@@ -29,8 +37,14 @@ class ListSectionFragment : BaseFragment(), ListSectionView, Injectable {
     lateinit var presenter: ListSectionPresenter
     lateinit var adapter: SectionAdapter
 
-    override fun layout(): Int =
-        R.layout.fragment_list_section
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val layout: Int = R.layout.fragment_list_section
+        return inflater.inflate(layout, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,15 +67,29 @@ class ListSectionFragment : BaseFragment(), ListSectionView, Injectable {
     }
 
     override fun showLoader() {
-        loaderOn()
+        CoroutineScope(Dispatchers.Main).launch {
+            loading_state?.let {
+                loading_state.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun hideLoader() {
-        loaderOff()
+        CoroutineScope(Dispatchers.Main).launch {
+            loading_state?.let {
+                it.visibility = View.GONE
+            }
+        }
     }
 
     override fun showMessage(text: String) {
-        message(text, root_layout)
+        CoroutineScope(Dispatchers.Main).launch {
+            Snackbar.make(
+                root_layout,
+                text,
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
     }
 
     private fun selectFragment(section: SectionModel) {

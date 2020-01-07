@@ -2,7 +2,7 @@ package com.mroz.mateusz.cvapplication.di.module
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.mroz.mateusz.cvapplication.api.ApiService
+import com.mroz.mateusz.cvapplication.data.remote.ApiService
 import com.mroz.mateusz.cvapplication.util.BASE_URL
 import com.mroz.mateusz.cvapplication.util.TIMEOUT
 import dagger.Module
@@ -22,7 +22,8 @@ class AppModule {
     @Provides
     @Singleton
     fun providesGson(): Gson {
-        return GsonBuilder().create()
+        return GsonBuilder()
+            .create()
     }
 
     @Provides
@@ -57,13 +58,14 @@ class AppModule {
     @Provides
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiService {
-        return retrofit.create<ApiService>(ApiService::class.java)
+        return retrofit.create<ApiService>(
+            ApiService::class.java)
     }
 
     @Provides
     @Singleton
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        var httpLoggingInterceptor =
+        val httpLoggingInterceptor =
             HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { message -> Timber.d(message) })
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return httpLoggingInterceptor

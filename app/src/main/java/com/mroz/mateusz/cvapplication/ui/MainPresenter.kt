@@ -1,6 +1,6 @@
 package com.mroz.mateusz.cvapplication.ui
 
-import com.mroz.mateusz.cvapplication.api.ApiService
+import com.mroz.mateusz.cvapplication.data.remote.ApiService
 import com.mroz.mateusz.cvapplication.ui.base_information.model.BaseInfo
 import com.mroz.mateusz.cvapplication.util.AutoSingleObservable
 import io.reactivex.android.schedulers.AndroidSchedulers

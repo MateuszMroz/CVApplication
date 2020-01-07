@@ -1,4 +1,4 @@
-package com.mroz.mateusz.cvapplication.api
+package com.mroz.mateusz.cvapplication.data.remote
 
 import com.mroz.mateusz.cvapplication.ui.base_information.model.BaseInfo
 import com.mroz.mateusz.cvapplication.ui.education.model.Education
@@ -6,6 +6,7 @@ import com.mroz.mateusz.cvapplication.ui.experience.model.Experience
 import com.mroz.mateusz.cvapplication.ui.projects.model.Project
 import com.mroz.mateusz.cvapplication.ui.skills.model.Skill
 import io.reactivex.Single
+import retrofit2.Call
 import retrofit2.http.GET
 
 interface ApiService {
@@ -14,7 +15,7 @@ interface ApiService {
     fun getBaseInformation(): Single<BaseInfo>
 
     @GET("education")
-    fun getEducationPosition(): Single<List<Education>>
+    suspend fun getEducationPosition(): List<Education>
 
     @GET("experience")
     fun getExperience(): Single<List<Experience>>
@@ -23,6 +24,6 @@ interface ApiService {
     fun getProjects(): Single<List<Project>>
 
     @GET("skills")
-    fun getSkills(): Single<List<Skill>>
+    suspend fun getSkills(): List<Skill>
 
 }

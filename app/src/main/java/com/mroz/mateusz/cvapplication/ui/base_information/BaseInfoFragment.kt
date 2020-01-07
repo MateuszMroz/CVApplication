@@ -5,20 +5,28 @@ import android.content.Intent
 import android.net.Uri
 import android.net.Uri.fromParts
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.mroz.mateusz.cvapplication.R
-import com.mroz.mateusz.cvapplication.di.Injectable
 import com.mroz.mateusz.cvapplication.ui.base.BaseFragment
 import com.mroz.mateusz.cvapplication.ui.base_information.model.BaseInfo
 import com.tbruyelle.rxpermissions2.RxPermissions
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_base_information.*
+import kotlinx.android.synthetic.main.fragment_base_information.loading_state
+import kotlinx.android.synthetic.main.fragment_skills.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  */
-class BaseInfoFragment : BaseFragment(), BaseInfoView, BaseInfoRouter, Injectable {
+class BaseInfoFragment : DaggerFragment(), BaseInfoView, BaseInfoRouter {
     companion object {
         @JvmStatic
         fun newInstance() = BaseInfoFragment()
@@ -29,26 +37,48 @@ class BaseInfoFragment : BaseFragment(), BaseInfoView, BaseInfoRouter, Injectabl
     @Inject
     lateinit var presenter: BaseInfoPresenter
 
-    override fun layout(): Int = R.layout.fragment_base_information
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val layout: Int = R.layout.fragment_base_information
+        return inflater.inflate(layout, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.view = this
         rxPermissions = RxPermissions(this)
+
         presenter.loadBaseInformation()
         onSelect()
     }
 
     override fun showLoader() {
-        loaderOn()
+        CoroutineScope(Dispatchers.Main).launch {
+            loading_state?.let {
+                loading_state.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun hideLoader() {
-        loaderOff()
+        CoroutineScope(Dispatchers.Main).launch {
+            loading_state?.let {
+                it.visibility = View.GONE
+            }
+        }
     }
 
     override fun showMessage(text: String) {
-        message(text, base_info_root)
+        CoroutineScope(Dispatchers.Main).launch {
+            Snackbar.make(
+                base_info_root,
+                text,
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
     }
 
     override fun inputBaseInfo(baseInfo: BaseInfo) {
@@ -66,7 +96,7 @@ class BaseInfoFragment : BaseFragment(), BaseInfoView, BaseInfoRouter, Injectabl
     }
 
     override fun navigatePhone(phoneNumber: String) {
-        rxPermissions
+        val result = rxPermissions
             .request(android.Manifest.permission.CALL_PHONE)
             .subscribe {
                 if (it) {
@@ -76,6 +106,7 @@ class BaseInfoFragment : BaseFragment(), BaseInfoView, BaseInfoRouter, Injectabl
                     showMessage(getString(R.string.accept_permission))
                 }
             }
+
     }
 
     override fun navigateMail(mail: String) {

@@ -2,28 +2,43 @@ package com.mroz.mateusz.cvapplication.ui.experience
 
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.mroz.mateusz.cvapplication.R
-import com.mroz.mateusz.cvapplication.di.Injectable
 import com.mroz.mateusz.cvapplication.ui.base.BaseFragment
 import com.mroz.mateusz.cvapplication.ui.experience.adapter.ExperienceAdapter
 import com.mroz.mateusz.cvapplication.ui.experience.adapter.ExperienceGroup
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_experience.*
+import kotlinx.android.synthetic.main.fragment_experience.loading_state
+import kotlinx.android.synthetic.main.fragment_skills.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  */
-class ExperienceFragment : BaseFragment(), ExperienceView, Injectable {
+class ExperienceFragment : DaggerFragment(), ExperienceView {
     companion object {
         @JvmStatic
         fun newInstance() = ExperienceFragment()
     }
 
-    override fun layout(): Int = R.layout.fragment_experience
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val layout: Int = R.layout.fragment_experience
+        return inflater.inflate(layout, container, false)
+    }
 
     @Inject
     lateinit var presenter: ExperiencePresenter
@@ -43,14 +58,28 @@ class ExperienceFragment : BaseFragment(), ExperienceView, Injectable {
     }
 
     override fun showLoader() {
-        loaderOn()
+        CoroutineScope(Dispatchers.Main).launch {
+            loading_state?.let {
+                loading_state.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun hideLoader() {
-        loaderOff()
+        CoroutineScope(Dispatchers.Main).launch {
+            loading_state?.let {
+                it.visibility = View.GONE
+            }
+        }
     }
 
     override fun showMessage(text: String) {
-        message(text, experience_root)
+        CoroutineScope(Dispatchers.Main).launch {
+            Snackbar.make(
+                experience_root,
+                text,
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
     }
 }

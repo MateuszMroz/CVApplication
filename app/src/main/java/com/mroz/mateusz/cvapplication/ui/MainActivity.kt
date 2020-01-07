@@ -9,11 +9,12 @@ import com.mroz.mateusz.cvapplication.R
 import com.mroz.mateusz.cvapplication.ui.base_information.model.BaseInfo
 import com.mroz.mateusz.cvapplication.ui.list_section.ListSectionFragment
 import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.DaggerAppCompatActivity
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), MainView, HasSupportFragmentInjector {
+class MainActivity : DaggerAppCompatActivity(), MainView, HasSupportFragmentInjector {
     @Inject
     lateinit var dispatcherAndroidInjector: DispatchingAndroidInjector<Fragment>
 

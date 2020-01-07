@@ -2,21 +2,29 @@ package com.mroz.mateusz.cvapplication.ui.projects
 
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.mroz.mateusz.cvapplication.R
-import com.mroz.mateusz.cvapplication.di.Injectable
 import com.mroz.mateusz.cvapplication.ui.base.BaseFragment
 import com.mroz.mateusz.cvapplication.ui.projects.adapter.ProjectAdapter
 import com.mroz.mateusz.cvapplication.ui.projects.model.Project
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_projects.*
+import kotlinx.android.synthetic.main.fragment_projects.loading_state
+import kotlinx.android.synthetic.main.fragment_skills.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  */
-class ProjectsFragment : BaseFragment(), ProjectsView, Injectable {
+class ProjectsFragment : DaggerFragment(), ProjectsView {
     companion object {
         @JvmStatic
         fun newInstance() = ProjectsFragment()
@@ -26,7 +34,14 @@ class ProjectsFragment : BaseFragment(), ProjectsView, Injectable {
     lateinit var presenter: ProjectsPresenter
     lateinit var adapter: ProjectAdapter
 
-    override fun layout(): Int = R.layout.fragment_projects
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val layout: Int = R.layout.fragment_projects
+        return inflater.inflate(layout, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,15 +58,29 @@ class ProjectsFragment : BaseFragment(), ProjectsView, Injectable {
     }
 
     override fun showLoader() {
-        loaderOn()
+        CoroutineScope(Dispatchers.Main).launch {
+            loading_state?.let {
+                loading_state.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun hideLoader() {
-        loaderOff()
+        CoroutineScope(Dispatchers.Main).launch {
+            loading_state?.let {
+                it.visibility = View.GONE
+            }
+        }
     }
 
     override fun showMessage(text: String) {
-        message(text, projects_root)
+        CoroutineScope(Dispatchers.Main).launch {
+            Snackbar.make(
+                skills_root,
+                text,
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
     }
 
     override fun updateAdapter(listProjects: List<Project>) {

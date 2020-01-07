@@ -30,10 +30,14 @@ abstract class BaseFragment : Fragment(), BaseView {
     }
 
     override fun loaderOn() {
-        loading_state.visibility = View.VISIBLE
+        loading_state?.let {
+            loading_state.visibility = View.VISIBLE
+        }
     }
 
     override fun loaderOff() {
-        loading_state.visibility = View.GONE
+        loading_state?.let {
+            it.visibility = View.GONE
+        }
     }
 }
