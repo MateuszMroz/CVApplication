@@ -10,13 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.mroz.mateusz.cvapplication.R
-import com.mroz.mateusz.cvapplication.ui.base.BaseFragment
 import com.mroz.mateusz.cvapplication.ui.education.adapter.EducationAdapter
 import com.mroz.mateusz.cvapplication.ui.education.model.Education
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_education.*
 import kotlinx.android.synthetic.main.fragment_education.loading_state
-import kotlinx.android.synthetic.main.fragment_skills.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main

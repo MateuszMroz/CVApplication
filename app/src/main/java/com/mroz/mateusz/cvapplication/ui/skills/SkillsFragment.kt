@@ -6,17 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.mroz.mateusz.cvapplication.R
-import com.mroz.mateusz.cvapplication.ui.base.BaseFragment
 import com.mroz.mateusz.cvapplication.ui.skills.adapter.SkillAdapter
 import com.mroz.mateusz.cvapplication.ui.skills.adapter.SkillsGroup
+import com.mroz.mateusz.cvapplication.viewModelFactory.ViewModelProviderFactory
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_skills.*
 import kotlinx.android.synthetic.main.fragment_skills.loading_state
-import kotlinx.android.synthetic.main.please_wait_information.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Main
 import javax.inject.Inject
@@ -31,8 +31,16 @@ class SkillsFragment : DaggerFragment(), SkillsView {
     }
 
     @Inject
-    lateinit var presenter: SkillsPresenter
+    lateinit var providerFactory: ViewModelProviderFactory
+    lateinit var viewModel: SkillsViewModel
+
     var adapter: SkillAdapter? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel = ViewModelProvider(this, providerFactory).get(SkillsViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,8 +53,8 @@ class SkillsFragment : DaggerFragment(), SkillsView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.view = this
-        presenter.loadSkills()
+        viewModel.view = this
+        viewModel.loadSkills()
     }
 
     override fun showLoader() {
@@ -82,5 +90,10 @@ class SkillsFragment : DaggerFragment(), SkillsView {
             skills_rv.layoutManager = layoutManager
             skills_rv.adapter = adapter
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.destroy()
     }
 }

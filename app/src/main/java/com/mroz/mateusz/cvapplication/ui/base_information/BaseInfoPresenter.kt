@@ -2,21 +2,14 @@ package com.mroz.mateusz.cvapplication.ui.base_information
 
 import com.mroz.mateusz.cvapplication.data.remote.ApiService
 import com.mroz.mateusz.cvapplication.ui.base_information.model.BaseInfo
-import com.mroz.mateusz.cvapplication.util.AutoSingleObservable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 
 class BaseInfoPresenter @Inject constructor(private val apiService: ApiService) {
-    @Inject
-    lateinit var disposable: CompositeDisposable
-
     lateinit var view: BaseInfoView
     lateinit var baseInfo: BaseInfo
 
-    fun loadBaseInformation() {
+    /*fun loadBaseInformation() {
         view.showLoader()
         apiService.getBaseInformation()
             .subscribeOn(Schedulers.io())
@@ -33,6 +26,6 @@ class BaseInfoPresenter @Inject constructor(private val apiService: ApiService) 
                     view.showMessage(e.message.toString())
                 }
             })
-    }
+    }*/
 
 }

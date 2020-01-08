@@ -3,20 +3,14 @@ package com.mroz.mateusz.cvapplication.ui.experience
 import com.mroz.mateusz.cvapplication.data.remote.ApiService
 import com.mroz.mateusz.cvapplication.ui.experience.adapter.ExperienceGroup
 import com.mroz.mateusz.cvapplication.ui.experience.model.Experience
-import com.mroz.mateusz.cvapplication.util.AutoSingleObservable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 
 class ExperiencePresenter @Inject constructor(private val apiService: ApiService) {
 
-    @Inject
-    lateinit var disposable: CompositeDisposable
     lateinit var view: ExperienceView
 
-    fun loadExperience() {
+    /*fun loadExperience() {
         view.showLoader()
         apiService.getExperience()
             .subscribeOn(Schedulers.io())
@@ -37,7 +31,7 @@ class ExperiencePresenter @Inject constructor(private val apiService: ApiService
 
             })
     }
-
+*/
 
     private fun mapToExpandableList(list: List<Experience>): List<ExperienceGroup> {
         val expandableList = mutableListOf<ExperienceGroup>()

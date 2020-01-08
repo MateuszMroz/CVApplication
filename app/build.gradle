@@ -25,7 +25,16 @@ android {
 }
 
 dependencies {
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$junit_androidx_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    androidTestImplementation "org.mockito:mockito-android:$mockito_version"
+
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$appcomat_version"
     implementation "com.google.android.material:material:$material_version"
@@ -34,27 +43,20 @@ dependencies {
     implementation "androidx.core:core-ktx:$core_ktx_version"
     implementation "androidx.constraintlayout:constraintlayout:$constarinlayout_version"
     implementation "androidx.legacy:legacy-support-v4:$legasy_support_v4_version"
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$junit_androidx_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
     implementation "androidx.recyclerview:recyclerview:$recycler_view_version"
 
     implementation "de.hdodenhof:circleimageview:$circle_image_version"
 
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
     implementation "com.google.dagger:dagger-android:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     implementation "com.google.dagger:dagger:$dagger_version"
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
-    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
-    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
     implementation "com.github.tbruyelle:rxpermissions:$rxpermission_version"
-
 
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
 
@@ -64,11 +66,8 @@ dependencies {
 
     implementation "com.jakewharton.timber:timber:$timber_version"
 
-    testImplementation "org.mockito:mockito-core:$mockito_version"
-    androidTestImplementation "org.mockito:mockito-android:$mockito_version"
-
-    implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
 
     implementation "com.thoughtbot:expandablerecyclerview:$expanded_recyclerview_version"

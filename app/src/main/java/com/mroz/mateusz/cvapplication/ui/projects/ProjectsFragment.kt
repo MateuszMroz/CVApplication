@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.mroz.mateusz.cvapplication.R
-import com.mroz.mateusz.cvapplication.ui.base.BaseFragment
 import com.mroz.mateusz.cvapplication.ui.projects.adapter.ProjectAdapter
 import com.mroz.mateusz.cvapplication.ui.projects.model.Project
 import dagger.android.support.DaggerFragment
@@ -47,7 +46,7 @@ class ProjectsFragment : DaggerFragment(), ProjectsView {
         super.onViewCreated(view, savedInstanceState)
         presenter.view = this
         initializeProjectList()
-        presenter.loadProjects()
+        //presenter.loadProjects()
     }
 
     private fun initializeProjectList() {

@@ -10,13 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.mroz.mateusz.cvapplication.R
-import com.mroz.mateusz.cvapplication.ui.base.BaseFragment
 import com.mroz.mateusz.cvapplication.ui.experience.adapter.ExperienceAdapter
 import com.mroz.mateusz.cvapplication.ui.experience.adapter.ExperienceGroup
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_experience.*
 import kotlinx.android.synthetic.main.fragment_experience.loading_state
-import kotlinx.android.synthetic.main.fragment_skills.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -47,7 +45,7 @@ class ExperienceFragment : DaggerFragment(), ExperienceView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.view = this
-        presenter.loadExperience()
+        //presenter.loadExperience()
     }
 
     override fun loadExperienceList(listExperience: List<ExperienceGroup>) {

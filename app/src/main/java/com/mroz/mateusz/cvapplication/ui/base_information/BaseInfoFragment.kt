@@ -11,13 +11,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.mroz.mateusz.cvapplication.R
-import com.mroz.mateusz.cvapplication.ui.base.BaseFragment
 import com.mroz.mateusz.cvapplication.ui.base_information.model.BaseInfo
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_base_information.*
 import kotlinx.android.synthetic.main.fragment_base_information.loading_state
-import kotlinx.android.synthetic.main.fragment_skills.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -51,7 +49,7 @@ class BaseInfoFragment : DaggerFragment(), BaseInfoView, BaseInfoRouter {
         presenter.view = this
         rxPermissions = RxPermissions(this)
 
-        presenter.loadBaseInformation()
+        //presenter.loadBaseInformation()
         onSelect()
     }
 

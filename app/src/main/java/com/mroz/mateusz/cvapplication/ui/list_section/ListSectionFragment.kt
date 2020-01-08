@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.mroz.mateusz.cvapplication.R
-import com.mroz.mateusz.cvapplication.ui.base.BaseFragment
 import com.mroz.mateusz.cvapplication.ui.base_information.BaseInfoFragment
 import com.mroz.mateusz.cvapplication.ui.education.EducationFragment
 import com.mroz.mateusz.cvapplication.ui.experience.ExperienceFragment
@@ -20,9 +19,9 @@ import com.mroz.mateusz.cvapplication.ui.skills.SkillsFragment
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_list_section.*
 import kotlinx.android.synthetic.main.fragment_list_section.loading_state
-import kotlinx.android.synthetic.main.fragment_skills.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -49,6 +48,10 @@ class ListSectionFragment : DaggerFragment(), ListSectionView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeListSection()
+
+        CoroutineScope(IO).launch {
+
+        }
     }
 
     override fun initializeListSection() {

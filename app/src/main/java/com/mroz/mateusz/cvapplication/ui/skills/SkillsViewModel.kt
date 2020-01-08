@@ -1,37 +1,38 @@
 package com.mroz.mateusz.cvapplication.ui.skills
 
+import androidx.lifecycle.ViewModel
 import com.mroz.mateusz.cvapplication.data.remote.ApiService
 import com.mroz.mateusz.cvapplication.ui.skills.adapter.SkillsGroup
 import com.mroz.mateusz.cvapplication.ui.skills.model.Skill
 import com.mroz.mateusz.cvapplication.ui.skills.model.SkillDetails
-import com.mroz.mateusz.cvapplication.util.AutoSingleObservable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import timber.log.Timber
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 
-class SkillsPresenter @Inject constructor(private val apiService: ApiService) {
+class SkillsViewModel @Inject constructor(private val apiService: ApiService) : ViewModel(), CoroutineScope {
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job + handlerException
+
+    private val handlerException = CoroutineExceptionHandler { _, exception ->
+        Timber.d("$exception handled !")
+        exception.printStackTrace()
+        view.showMessage(exception.message.toString())
+        view.hideLoader()
+    }
+
+    private val job: Job = Job()
 
     lateinit var view: SkillsView
 
     fun loadSkills() {
         view.showLoader()
-        CoroutineScope(IO).launch {
-            try {
-                val result = mapToExpandableList(apiService.getSkills())
-                view.loadSkillList(result)
-                view.hideLoader()
-            } catch (e: Exception) {
-                e.printStackTrace()
-                view.showMessage(e.message.toString())
-                view.hideLoader()
-            }
-
+        launch {
+            val result = mapToExpandableList(apiService.getSkills())
+            view.loadSkillList(result)
+            view.hideLoader()
         }
     }
 
@@ -44,7 +45,11 @@ class SkillsPresenter @Inject constructor(private val apiService: ApiService) {
             val expandableGroup = SkillsGroup(title, listSkill ?: emptyList())
             expandableList.add(expandableGroup)
         }
-
         return expandableList
     }
+
+    fun destroy() {
+        job.cancel()
+    }
+
 }

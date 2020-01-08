@@ -28,7 +28,7 @@ class MainActivity : DaggerAppCompatActivity(), MainView, HasSupportFragmentInje
             setFragment(ListSectionFragment.newInstance())
         }
         presenter.view = this
-        presenter.loadBaseInfo()
+        //presenter.loadBaseInfo()
     }
 
     override fun supportFragmentInjector() = dispatcherAndroidInjector
