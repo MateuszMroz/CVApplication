@@ -3,6 +3,7 @@ package com.mroz.mateusz.cvapplication.di.module
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.mroz.mateusz.cvapplication.data.remote.ApiService
+import com.mroz.mateusz.cvapplication.data.remote.CvRemoteDataSource
 import com.mroz.mateusz.cvapplication.util.BASE_URL
 import com.mroz.mateusz.cvapplication.util.TIMEOUT
 import dagger.Module
@@ -69,4 +70,9 @@ class AppModule {
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return httpLoggingInterceptor
     }
+
+    @Provides
+    @Singleton
+    fun provideCvRemoteDataSource(apiService: ApiService): CvRemoteDataSource
+            = CvRemoteDataSource(apiService)
 }

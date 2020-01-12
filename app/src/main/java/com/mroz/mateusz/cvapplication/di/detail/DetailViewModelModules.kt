@@ -1,4 +1,4 @@
-package com.mroz.mateusz.cvapplication.di.details
+package com.mroz.mateusz.cvapplication.di.detail
 
 import androidx.lifecycle.ViewModel
 import com.mroz.mateusz.cvapplication.di.ViewModelKey

@@ -17,5 +17,5 @@ interface CvRepository {
 
     suspend fun getProjects(forceUpdate: Boolean = false): List<Project>
 
-    suspend fun getSkills(forceUpdate: Boolean = false): List<Skill>
+    suspend fun getSkills(forceUpdate: Boolean = false): Result<List<Skill>>
 }

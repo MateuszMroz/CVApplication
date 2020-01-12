@@ -3,7 +3,7 @@ package com.mroz.mateusz.cvapplication.di.component
 import android.app.Application
 import com.mroz.mateusz.cvapplication.CVApplication
 import com.mroz.mateusz.cvapplication.di.ViewModelFactoryModule
-import com.mroz.mateusz.cvapplication.di.details.DetailViewModelModules
+import com.mroz.mateusz.cvapplication.di.detail.DetailViewModelModules
 import com.mroz.mateusz.cvapplication.di.module.AppModule
 import com.mroz.mateusz.cvapplication.di.module.ActivityBuildersModule
 import dagger.BindsInstance

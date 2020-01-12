@@ -30,7 +30,7 @@ class ProjectsFragment : DaggerFragment(), ProjectsView {
     }
 
     @Inject
-    lateinit var presenter: ProjectsPresenter
+    lateinit var viewModel: ProjectsViewModel
     lateinit var adapter: ProjectAdapter
 
     override fun onCreateView(
@@ -44,9 +44,9 @@ class ProjectsFragment : DaggerFragment(), ProjectsView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.view = this
+        viewModel.view = this
         initializeProjectList()
-        //presenter.loadProjects()
+        viewModel.loadProjects()
     }
 
     private fun initializeProjectList() {
